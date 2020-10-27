@@ -3,8 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './shared/material.module';
-import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { DemoModule } from './demo/demo.module';
+
+const routes: Routes = [
+  { path: 'demo', loadChildren: () => DemoModule },
+  { path:'**', redirectTo: 'demo' }
+];
 
 @NgModule({
   declarations: [
@@ -13,8 +18,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
